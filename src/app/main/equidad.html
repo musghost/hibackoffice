@@ -1,0 +1,72 @@
+<div class="custom-table">
+  <div class="container">
+    <table class="table-2 hidden-xs">
+      <thead>
+        <tr>
+          <th></th>
+          <th><span>Ronda</span></th>
+          <th><span>Inversión<br>comprometida</span></th>
+          <th><span>Tipo de<br>producto</span></th>
+          <th><span>Industria</span></th>
+          <th><span>Stage</span></th>
+          <th><span>Link</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="no-border">
+          <td colspan="6"></td>
+        </tr>
+        <tr ng-repeat="deuda in main.equidades">
+          <td><img ng-src="{{deuda.imagen}}"></td>
+          <td><a class="btnBlue" ng-href="{{deuda.link}}" target="_blank">{{deuda.ronda}}</a></td>
+          <td><a class="btnOrange" ng-href="{{deuda.link}}" target="_blank">{{deuda.inversion}}</a></td>
+          <td>{{deuda.tipo}}</td>
+          <td>{{deuda.industria}}</td>
+          <td>{{deuda.stage}}</td>
+          <td><a class="link" ng-href="{{deuda.link}}" target="_blank"></a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="visible-xs-block">
+      <table class="table little-table" ng-repeat="deuda in main.equidades">
+        <thead>
+          <tr>
+            <td><img ng-src="{{deuda.imagen}}"></td>
+            <td>
+              <a class="simple-link" ng-href="{{deuda.link}}" target="_blank">
+                <img src="assets/images/next.png">
+              </a>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="orange">Ronda</span></td>
+            <td><span class="btnOrange">{{deuda.ronda}}</span></td>
+          </tr>
+          <tr>
+            <td><span class="blue">Inversión<br>comprometida</span></td>
+            <td><span class="btnBlue">{{deuda.inversion}}</span></td>
+          </tr>
+          <tr>
+            <td>Tipo de<br>producto</td>
+            <td>{{deuda.tipo}}</td>
+          </tr>
+          <tr>
+            <td>Industria</td>
+            <td>{{deuda.industria}}</td>
+          </tr>
+          <tr>
+            <td>Stage</td>
+            <td>{{deuda.stage}}</td>
+          </tr>
+          <tr>
+            <td>Link</td>
+            <td><a ng-href="{{deuda.link}}" target="_blank">{{deuda.link}}</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

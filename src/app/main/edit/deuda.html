@@ -1,0 +1,65 @@
+<div class="row">
+  <div class="col-sm-6">
+
+    <form ng-submit="cat.createProduct($event)" ng-show="cat.typeName == 'Project'">
+      <div class="form-group">
+        <label>Imagen</label>
+        <span ng-show="cat.Project.image"><a ng-href="{{cat.Project.image}}" target="_blank">{{cat.Project.image}}</a></span>
+        <div>
+          <button type="button" class="btn btn-link" ng-click="cat.setImage(cat.typeName)">Cargar</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" placeholder="Nombre" class="form-control" ng-model="cat.Project.name" required>
+      </div>
+      <div class="form-group">
+        <label>Tipo</label>
+        <input type="text" placeholder="Tipo" class="form-control" ng-model="cat.Project.type" required>
+      </div>
+      <div class="form-group">
+        <label>Descripción</label>
+        <textarea placeholder="Descripción" class="form-control" ng-model="cat.Project.description" rows="10" required></textarea>
+      </div>
+      <div class="form-group">
+        <label>Link</label>
+        <input type="text" placeholder="Link" class="form-control" ng-model="cat.Project.link" required>
+      </div>
+      <a class="btn btn-default" ui-sref="admin.category({id: cat.typeName})" ui-sref-opts="{reload: true}">Regresar</a>
+      <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+
+    <form ng-submit="cat.createProduct($event)" ng-show="cat.typeName == 'Case'">
+      <div class="form-group">
+        <label>Imagen</label>
+        <span ng-show="cat.Case.image"><a ng-href="{{cat.Case.image}}" target="_blank">{{cat.Case.image}}</a></span>
+        <div>
+          <button type="button" class="btn btn-link" ng-click="cat.setImage(cat.typeName)">Cargar</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" placeholder="Nombre" class="form-control" ng-model="cat.Case.name" required>
+      </div>
+      <div class="form-group">
+        <label>Tipo</label>
+        <input type="text" placeholder="Tipo" class="form-control" ng-model="cat.Case.type" required>
+      </div>
+      <div class="form-group">
+        <label>Descripción</label>
+        <textarea placeholder="Descripción" class="form-control" ng-model="cat.Case.description" rows="10" required></textarea>
+      </div>
+      <div class="form-group">
+        <label>Via</label>
+        <input type="text" placeholder="Via" class="form-control" ng-model="cat.Case.via" required>
+      </div>
+      <div class="form-group">
+        <label>Link</label>
+        <input type="text" placeholder="Link" class="form-control" ng-model="cat.Case.link" required>
+      </div>
+      <a class="btn btn-default" ui-sref="admin.category({id: cat.typeName})" ui-sref-opts="{reload: true}">Regresar</a>
+      <button type="submit" class="btn btn-success">Guardar</button>
+    </form>
+
+  </div>
+</div>

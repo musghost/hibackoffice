@@ -1,0 +1,58 @@
+<div>
+  <h1>{{cat.type}}</h1>
+  <div ui-view>
+    <nav class="">
+      <ul class="nav nav-pills">
+        <li><a ui-sref="admin.category.new({id: cat.type})">Nuevo producto</a></li>
+      </ul>
+    </nav>
+
+    <table class="table" ng-show="cat.type == 'Project'">
+      <thead>
+        <tr>
+          <th><span>Nombre</span></th>
+          <th><span>Tipo</span></th>
+          <th><span>Descripción</span></th>
+          <th><span>Link</span></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="project in cat.resources">
+          <td>{{project.name}}</td>
+          <td>{{project.type}}</td>
+          <td>{{project.description}}</td>
+          <td><a class="link" ng-href="{{project.link}}" target="_blank">Go</a></td>
+          <td><a ng-click="cat.delete($event, project.id)" href="#">Eliminar</a></td>
+          <td><a ui-sref="admin.category.edit({id: cat.type, item: project.id})">Editar</a></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="table" ng-show="cat.type == 'Case'">
+      <thead>
+        <tr>
+          <th><span>Nombre</span></th>
+          <th><span>Tipo</span></th>
+          <th><span>Via</span></th>
+          <th><span>Descripción</span></th>
+          <th><span>Link</span></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="case in cat.resources">
+          <td>{{case.name}}</td>
+          <td>{{case.type}}</td>
+          <td>{{case.Via}}</td>
+          <td>{{case.description}}</td>
+          <td><a class="link" ng-href="{{case.link}}" target="_blank">Go</a></td>
+          <td><a ng-click="cat.delete($event, case.id)" href="#">Eliminar</a></td>
+          <td><a ui-sref="admin.category.edit({id: cat.type, item: case.id})">Editar</a></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div class="custom-table">
+  <div class="container">
+    <table class="table-2 all-border">
+      <thead>
+        <tr>
+          <th><span>Página WEB</span></th>
+          <th><span>Compra</span></th>
+          <th><span>Venta</span></th>
+          <th><span>Link</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="no-border">
+          <td colspan="4"></td>
+        </tr>
+        <tr ng-repeat="deuda in main.cryptos">
+          <td>{{deuda.pagina}}</td>
+          <td>{{deuda.compra}}</td>
+          <td>{{deuda.venta}}</td>
+          <td><a class="link" ng-href="{{deuda.link}}" target="_blank"></a></td>
+        </tr>
+      </tbody>
+    </table>
+
+  </div>
+</div>

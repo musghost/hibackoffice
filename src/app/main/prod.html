@@ -1,0 +1,73 @@
+<div class="custom-table">
+  <div class="container">
+    <table class="table-2 hidden-xs">
+      <thead>
+        <tr>
+          <th></th>
+          <th><span>Producto</span></th>
+          <th><span>Tipo</span></th>
+          <th><span>Plazo de<br>liquidez</span></th>
+          <th><span>Calificación</span></th>
+          <th><span>Rendimiento<br>últimos 3 años</span></th>
+          <th><span>Link</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="no-border">
+          <td colspan="6"></td>
+        </tr>
+        <tr ng-repeat="deuda in main.financieros">
+          <td><img ng-src="{{deuda.imagen}}"></td>
+          <td>{{deuda.producto}}</td>
+          <td>{{deuda.tipo}}</td>
+          <td>{{deuda.plazo}}</td>
+          <td>{{deuda.calificacion}}</td>
+          <td>{{deuda.rendimiento}}</td>
+          <td><a class="link" ng-href="{{deuda.link}}" target="_blank"></a></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="visible-xs-block">
+      <table class="table little-table" ng-repeat="deuda in main.financieros">
+        <thead>
+          <tr>
+            <td><img ng-src="{{deuda.imagen}}"></td>
+            <td>
+              <a class="simple-link" ng-href="{{deuda.link}}" target="_blank">
+                <img src="assets/images/next.png">
+              </a>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="orange">Producto</span></td>
+            <td><span class="btnOrange">{{deuda.producto}}</span></td>
+          </tr>
+          <tr>
+            <td><span class="blue">Tipo</span></td>
+            <td><span class="btnBlue">{{deuda.tipo}}</span></td>
+          </tr>
+          <tr>
+            <td>Plazo de<br>liquidez</td>
+            <td>{{deuda.plazo}}</td>
+          </tr>
+          <tr>
+            <td>Calificación</td>
+            <td>{{deuda.calificacion}}</td>
+          </tr>
+          <tr>
+            <td>Rendimiento<br>últimos 3 años</td>
+            <td>{{deuda.rendimiento}}</td>
+          </tr>
+          <tr>
+            <td>Link</td>
+            <td><a ng-href="{{deuda.link}}" target="_blank">{{deuda.link}}</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
