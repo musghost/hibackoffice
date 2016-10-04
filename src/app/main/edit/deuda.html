@@ -1,64 +1,181 @@
 <div class="row">
-  <div class="col-sm-6">
-
-    <form ng-submit="cat.createProduct($event)" ng-show="cat.typeName == 'Project'">
-      <div class="form-group">
-        <label>Imagen</label>
-        <span ng-show="cat.Project.image"><a ng-href="{{cat.Project.image}}" target="_blank">{{cat.Project.image}}</a></span>
+  <div class="col-sm-12">
+    <form name="newItem" ng-submit="cat.createProduct($event)" ng-show="cat.typeName == 'Course'">
+      <div>
         <div>
-          <button type="button" class="btn btn-link" ng-click="cat.setImage(cat.typeName)">Cargar</button>
+          <input ng-model="cat.Course.title" class="form-control" type="text" name="title" placeholder="Título" required>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><span>Abstracto</span></th>
+              <th><span>Descripción</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <textarea ng-model="cat.Course.abstract" class="form-control" required></textarea>
+              </td>
+              <td>
+                <textarea ng-model="cat.Course.description" class="form-control" required></textarea>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><span>Perfil</span></th>
+              <th><span>Cuándo/Dónde</span></th>
+              <th><span>Precio</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <textarea ng-model="cat.Course.profile" class="form-control" required></textarea>
+              </td>
+              <td>
+                <textarea ng-model="cat.Course.whenWhere" class="form-control" required></textarea>
+              </td>
+              <td>
+                <input ng-model="cat.Course.price" type="text" class="form-control" required></input>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><span>Financiamiento</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><textarea ng-model="cat.Course.priceDescription" class="form-control" required></textarea></td>
+            </tr>
+            <tr>
+              <td>
+                <input type="text" ng-model="cat.Course.image" class="form-control" placeholder="Imagen">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <button class="btn btn-primary" type="submit" ng-click="">Guardar</button>
+          <a class="btn btn-success">Regresar</a>
         </div>
       </div>
-      <div class="form-group">
-        <label>Nombre</label>
-        <input type="text" placeholder="Nombre" class="form-control" ng-model="cat.Project.name" required>
-      </div>
-      <div class="form-group">
-        <label>Tipo</label>
-        <input type="text" placeholder="Tipo" class="form-control" ng-model="cat.Project.type" required>
-      </div>
-      <div class="form-group">
-        <label>Descripción</label>
-        <textarea placeholder="Descripción" class="form-control" ng-model="cat.Project.description" rows="10" required></textarea>
-      </div>
-      <div class="form-group">
-        <label>Link</label>
-        <input type="text" placeholder="Link" class="form-control" ng-model="cat.Project.link" required>
-      </div>
-      <a class="btn btn-default" ui-sref="admin.category({id: cat.typeName})" ui-sref-opts="{reload: true}">Regresar</a>
-      <button type="submit" class="btn btn-success">Guardar</button>
     </form>
 
-    <form ng-submit="cat.createProduct($event)" ng-show="cat.typeName == 'Case'">
-      <div class="form-group">
-        <label>Imagen</label>
-        <span ng-show="cat.Case.image"><a ng-href="{{cat.Case.image}}" target="_blank">{{cat.Case.image}}</a></span>
+    <form name="newItem" ng-submit="cat.createProduct($event)" ng-show="cat.typeName == 'Track'">
+      <div>
         <div>
-          <button type="button" class="btn btn-link" ng-click="cat.setImage(cat.typeName)">Cargar</button>
+          <input ng-model="cat.Track.title" class="form-control" type="text" name="title" placeholder="Nombre" required>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><span>Description</span></th>
+              <th><span>Módulos</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><textarea class="form-control" ng-model="cat.Track.description"></textarea></td>
+              <td><textarea class="form-control" ng-model="cat.Track.modules"></textarea></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><span>Puesto</span></th>
+              <th><span>Nombre</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input class="form-control" type="text" ng-model="cat.Track.position"></td>
+              <td><input class="form-control" type="text" ng-model="cat.Track.name"></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><span>Facebook</span></th>
+              <th><span>Twitter</span></th>
+              <th><span>Web</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input class="form-control" type="text" ng-model="cat.Track.facebook"></td>
+              <td><input class="form-control" type="text" ng-model="cat.Track.twitter"></td>
+              <td><input class="form-control" type="text" ng-model="cat.Track.web"></td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <input type="text" ng-model="cat.Track.image" class="form-control" placeholder="Imagen">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <button class="btn btn-primary" type="submit" ng-click="">Guardar</button>
+          <a class="btn btn-success">Regresar</a>
         </div>
       </div>
-      <div class="form-group">
-        <label>Nombre</label>
-        <input type="text" placeholder="Nombre" class="form-control" ng-model="cat.Case.name" required>
+    </form>
+
+    <form name="newItem" ng-submit="cat.createProduct($event)" ng-show="cat.typeName == 'Guest'">
+      <div>
+        <input type="text" class="form-control" ng-model="cat.Guest.title">
+        <table class="table">
+          <thead>
+            <tr>
+              <th><span>Puesto</span></th>
+              <th><span>Facebook</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" class="form-control" ng-model="cat.Guest.position"></td>
+              <td><input type="text" class="form-control" ng-model="cat.Guest.facebook"></td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><span>Twitter</span></th>
+              <th><span>Web</span></th>
+              <th><span>Linked-In</span></th>
+              <th><span>Foto</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><input type="text" class="form-control" ng-model="cat.Guest.twitter"></td>
+              <td><input type="text" class="form-control" ng-model="cat.Guest.web"></td>
+              <td><input type="text" class="form-control" ng-model="cat.Guest.linkedin"></td>
+              <td><input type="text" class="form-control" ng-model="cat.Guest.image"></td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                <input type="text" ng-model="cat.Guest.image" class="form-control" placeholder="Imagen">
+              </td>
+              <td></td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <button class="btn btn-primary" type="submit" ng-click="">Guardar</button>
+          <a class="btn btn-success">Regresar</a>
+        </div>
       </div>
-      <div class="form-group">
-        <label>Tipo</label>
-        <input type="text" placeholder="Tipo" class="form-control" ng-model="cat.Case.type" required>
-      </div>
-      <div class="form-group">
-        <label>Descripción</label>
-        <textarea placeholder="Descripción" class="form-control" ng-model="cat.Case.description" rows="10" required></textarea>
-      </div>
-      <div class="form-group">
-        <label>Via</label>
-        <input type="text" placeholder="Via" class="form-control" ng-model="cat.Case.via" required>
-      </div>
-      <div class="form-group">
-        <label>Link</label>
-        <input type="text" placeholder="Link" class="form-control" ng-model="cat.Case.link" required>
-      </div>
-      <a class="btn btn-default" ui-sref="admin.category({id: cat.typeName})" ui-sref-opts="{reload: true}">Regresar</a>
-      <button type="submit" class="btn btn-success">Guardar</button>
     </form>
 
   </div>

@@ -17,9 +17,6 @@ angular.module 'iventureFront'
         templateUrl: 'app/main/tables.html'
         controller: 'CategoryController'
         controllerAs: 'cat'
-        resolve:
-          type: ($stateParams) ->
-            $stateParams.id
       .state 'admin.category.new',
         url: 'new'
         templateUrl: 'app/main/edit/deuda.html'
@@ -31,11 +28,12 @@ angular.module 'iventureFront'
         controller: 'EditCategoryController'
         controllerAs: 'cat'
         resolve:
-          type: ($stateParams, Project, Case) ->
+          type: ($stateParams, Course, Track, Guest) ->
             Cat = eval($stateParams.id)
             Cat
               .findById({id: $stateParams.item})
               .$promise
               .then (result) ->
                 result
+
     $urlRouterProvider.otherwise '/login'

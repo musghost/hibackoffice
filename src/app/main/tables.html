@@ -1,58 +1,155 @@
 <div>
-  <h1>{{cat.type}}</h1>
+  <h1>{{cat.id}}</h1>
   <div ui-view>
     <nav class="">
       <ul class="nav nav-pills">
-        <li><a ui-sref="admin.category.new({id: cat.type})">Nuevo producto</a></li>
+        <li><a ui-sref="admin.category.new({id: cat.id})">Nuevo producto</a></li>
       </ul>
     </nav>
+    <div ng-show="cat.id == 'Course'">
+      <div ng-repeat="item in cat.resources">
+        <h3>{{item.title}}</h3>
+        <div>
+          <a ui-sref="admin.category.edit({item: item.id})">Editar</a>
+          <a href="#" ng-click="cat.delete($event, item.id)">Eliminar</a>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><span>Abstracto</span></th>
+              <th><span>Description</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{item.abstract}}</td>
+              <td>{{item.description}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><span>Perfil</span></th>
+              <th><span>Cuándo/Dónde</span></th>
+              <th><span>Precio</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{item.profile}}</td>
+              <td>{{item.whenWhere}}</td>
+              <td>{{item.price}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><span>Financiamiento</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{item.priceDescription}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <a href="{{item.image}}" target="_blank">{{item.image}}</a>
+        </p>
+      </div>
+    </div>
 
-    <table class="table" ng-show="cat.type == 'Project'">
-      <thead>
-        <tr>
-          <th><span>Nombre</span></th>
-          <th><span>Tipo</span></th>
-          <th><span>Descripción</span></th>
-          <th><span>Link</span></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="project in cat.resources">
-          <td>{{project.name}}</td>
-          <td>{{project.type}}</td>
-          <td>{{project.description}}</td>
-          <td><a class="link" ng-href="{{project.link}}" target="_blank">Go</a></td>
-          <td><a ng-click="cat.delete($event, project.id)" href="#">Eliminar</a></td>
-          <td><a ui-sref="admin.category.edit({id: cat.type, item: project.id})">Editar</a></td>
-        </tr>
-      </tbody>
-    </table>
-    <table class="table" ng-show="cat.type == 'Case'">
-      <thead>
-        <tr>
-          <th><span>Nombre</span></th>
-          <th><span>Tipo</span></th>
-          <th><span>Via</span></th>
-          <th><span>Descripción</span></th>
-          <th><span>Link</span></th>
-          <th></th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="case in cat.resources">
-          <td>{{case.name}}</td>
-          <td>{{case.type}}</td>
-          <td>{{case.Via}}</td>
-          <td>{{case.description}}</td>
-          <td><a class="link" ng-href="{{case.link}}" target="_blank">Go</a></td>
-          <td><a ng-click="cat.delete($event, case.id)" href="#">Eliminar</a></td>
-          <td><a ui-sref="admin.category.edit({id: cat.type, item: case.id})">Editar</a></td>
-        </tr>
-      </tbody>
-    </table>
+    <div ng-show="cat.id == 'Track'">
+      <div ng-repeat="item in cat.resources">
+        <h3>{{item.title}}</h3>
+        <div>
+          <a ui-sref="admin.category.edit({item: item.id})">Editar</a>
+          <a href="#" ng-click="cat.delete($event, item.id)">Eliminar</a>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><span>Description</span></th>
+              <th><span>Módulos</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{item.description}}</td>
+              <td>{{item.modules}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><span>Puesto</span></th>
+              <th><span>Facebook</span></th>
+              <th><span>Twitter</span></th>
+              <th><span>Web</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{item.position}}</td>
+              <td>{{item.facebook}}</td>
+              <td>{{item.twitter}}</td>
+              <td>{{item.web}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <a href="{{item.image}}" target="_blank">{{item.image}}</a>
+        </p>
+      </div>
+    </div>
+
+    <div ng-show="cat.id == 'Guest'">
+      <div ng-repeat="item in cat.resources">
+        <h3>{{item.title}}</h3>
+        <div>
+          <a ui-sref="admin.category.edit({item: item.id})">Editar</a>
+          <a href="#" ng-click="cat.delete($event, item.id)">Eliminar</a>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><span>Puesto</span></th>
+              <th><span>Facebook</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{item.position}}</td>
+              <td>{{item.facebook}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <table class="table">
+          <thead>
+            <tr>
+              <th><span>Twitter</span></th>
+              <th><span>Web</span></th>
+              <th><span>Linked-In</span></th>
+              <th><span>Foto</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{item.twitter}}</td>
+              <td>{{item.web}}</td>
+              <td>{{item.linkedin}}</td>
+              <td>{{item.image}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <a href="{{item.image}}" target="_blank">{{item.image}}</a>
+        </p>
+      </div>
+    </div>
 
   </div>
 </div>

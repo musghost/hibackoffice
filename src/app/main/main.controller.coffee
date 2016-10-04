@@ -7,27 +7,31 @@ angular.module 'iventureFront'
     {
       link: fn_link
     }
+    return
   .controller 'AdminController', ($state) ->
     'ngInject'
     vm = this
     
     vm.types = [
-      {id: 'Project', name: 'Proyectos'},
-      {id: 'Case', name: 'Casos'}
+      {id: 'Course', name: 'Cursos'},
+      {id: 'Track', name: 'Tracks'},
+      {id: 'Guest', name: 'Invitados'}
     ]
     return
-
-  .controller 'CategoryController', (type, Project, Case, toastr) ->
+  .controller 'CategoryController', ($state, toastr, $stateParams, Course, Track, Guest) ->
     'ngInject'
     vm = this
-    vm.type = type
 
+    vm.id = $stateParams.id
 
-    Get = eval(type)
+    Get = eval $stateParams.id
+
     Get.find()
       .$promise
-      .then (response) ->
-        vm.resources = response
+      .then (items) ->
+        vm.resources = items
+      .catch ->
+          toastr.error 'Error', 'No se pudo borrar el elemento'
 
     vm.delete = (event, id) ->
       event.preventDefault()
@@ -41,8 +45,29 @@ angular.module 'iventureFront'
               vm.resources = response
         .catch ->
           toastr.error 'Error', 'No se pudo borrar el elemento'
-
+  
     return
+
+  .controller 'NewCategoryController', (toastr, $stateParams, Course, Track, $state, $uibModal) ->
+    'ngInject'
+    vm = this
+    vm.Course = {}
+    vm.Track = {}
+
+    vm.typeName = $stateParams.id
+    Get = eval($stateParams.id)
+    vm.createProduct = (event) ->
+      event.preventDefault()
+      Get
+        .create(vm[vm.typeName])
+        .$promise
+        .then () ->
+          toastr.success 'Elemento agregado', 'Se agregó el elemento a la tabla'
+          $state.go 'admin.category', {id: vm.typeName}, {reload: true}
+        .catch ->
+          toastr.error 'Elemento agregado', 'Se agregó el elemento a la tabla'
+    return
+
   .controller 'EditCategoryController', (type, toastr, $stateParams, $uibModal, base) ->
     'ngInject'
     vm = this
@@ -98,59 +123,7 @@ angular.module 'iventureFront'
 
     vm[vm.typeName] = type
     return
-  .controller 'NewCategoryController', (type, toastr, $stateParams, Project, Case, $state, $uibModal) ->
-    'ngInject'
-    vm = this
-    vm.Project = {}
-    vm.Case = {}
 
-    vm.typeName = $stateParams.id
-    Get = eval($stateParams.id)
-    vm.createProduct = () ->
-      Get
-        .create(vm[vm.typeName])
-        .$promise
-        .then () ->
-          toastr.success 'Elemento agregado', 'Se agregó el elemento a la tabla'
-          $state.go 'admin.category', {id: vm.typeName}, {reload: true}
-        .catch ->
-          toastr.error 'Elemento agregado', 'Se agregó el elemento a la tabla'
-
-    vm.setImage = (type) ->
-      modal = $uibModal.open({
-        animation: true
-        templateUrl: 'app/main/edit/upload.html'
-        size: 'md'
-        controller: ($scope, base) ->
-          formdata = new FormData()
-
-          $scope.saveIt = ->
-            $.ajax({
-              url: "http://#{base}/api/containers/#{type}/upload"
-              type: 'POST'
-              data: formdata
-              async: false
-              success: (response) ->
-                $scope.$close("http://#{base}/api/containers/#{type}/download/#{response.result.files.file[0].name}")
-              error: () ->
-                console.log 'error'
-              cache: false
-              contentType: false
-              processData: false
-            })
-            return
-          $scope.getTheFiles = ($files) ->
-            angular.forEach $files, (value, key) ->
-              formdata.append 'file', value
-            console.log formdata
-          return
-      })
-      modal.result.then (result) ->
-        console.log result
-        if result
-          vm[vm.typeName].image = result
-
-    return
   .controller 'LoginController', (Admin, $state) ->
     'ngInject'
     vm = @
