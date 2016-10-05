@@ -9,4 +9,5 @@ angular.module 'iventureFront', [
   'ui.router',
   'ui.bootstrap',
   'lbServices',
-  'toastr']
+  'toastr',
+  'textAngular']

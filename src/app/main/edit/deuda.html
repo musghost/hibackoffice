@@ -5,24 +5,15 @@
         <div>
           <input ng-model="cat.Course.title" class="form-control" type="text" name="title" placeholder="Título" required>
         </div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th><span>Abstracto</span></th>
-              <th><span>Descripción</span></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>
-                <textarea ng-model="cat.Course.abstract" class="form-control" required></textarea>
-              </td>
-              <td>
-                <textarea ng-model="cat.Course.description" class="form-control" required></textarea>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <dir>
+          <label>Abstracto</label>
+          <textarea ng-model="cat.Course.abstract" class="form-control" required></textarea>
+        </dir>
+        <div>
+          <label>Descripción</label>
+          <text-angular ng-model="cat.Course.description"></text-angular>
+          <textarea ng-model="cat.Course.description" class="form-control" required></textarea>
+        </div>
         <table class="table">
           <thead>
             <tr>
