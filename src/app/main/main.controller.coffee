@@ -48,11 +48,12 @@ angular.module 'iventureFront'
   
     return
 
-  .controller 'NewCategoryController', (toastr, $stateParams, Course, Track, $state, $uibModal) ->
+  .controller 'NewCategoryController', (toastr, $stateParams, Course, Track, Guest, $state, $uibModal) ->
     'ngInject'
     vm = this
     vm.Course = {}
     vm.Track = {}
+    vm.Guest = {}
 
     vm.typeName = $stateParams.id
     Get = eval($stateParams.id)
