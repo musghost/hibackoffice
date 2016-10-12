@@ -55,6 +55,9 @@ angular.module 'iventureFront'
     vm.Track = {}
     vm.Guest = {}
 
+    Course.find().$promise.then (courses) ->
+      vm.courses = courses
+
     vm.typeName = $stateParams.id
     Get = eval($stateParams.id)
     vm.createProduct = (event) ->
@@ -69,11 +72,13 @@ angular.module 'iventureFront'
           toastr.error 'Elemento agregado', 'Se agregó el elemento a la tabla'
     return
 
-  .controller 'EditCategoryController', (type, toastr, $stateParams, $uibModal, base) ->
+  .controller 'EditCategoryController', (type, toastr, $stateParams, $uibModal, base, Course) ->
     'ngInject'
     vm = this
 
     vm.typeName = $stateParams.id
+    Course.find().$promise.then (courses) ->
+      vm.courses = courses
 
     vm.createProduct = (event) ->
       event.preventDefault()

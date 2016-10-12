@@ -69,6 +69,11 @@
     <form name="newItem" ng-submit="cat.createProduct($event)" ng-show="cat.typeName === 'Track'">
       <div>
         <div class="form-group">
+          <select class="form-control" ng-model="cat.Track.courseId" ng-options="course.title for course in cat.courses" required>
+            <option value="">Selecciona un curso</option>
+          </select>
+        </div>
+        <div class="form-group">
           <input ng-model="cat.Track.title" class="form-control" type="text" name="title" placeholder="Nombre" required>
         </div>
         <div class="form-group">
@@ -123,6 +128,11 @@
 
     <form name="newItem" ng-submit="cat.createProduct($event)" ng-show="cat.typeName == 'Guest'">
       <div>
+        <div class="form-group">
+          <select class="form-control" ng-model="cat.Track.courseId" ng-options="course.title for course in cat.courses" required>
+            <option value="">Selecciona un curso</option>
+          </select>
+        </div>
         <div class="form-group">
           <input type="text" class="form-control" ng-model="cat.Guest.title" placeholder="Nombre">
         </div>
