@@ -9,6 +9,9 @@
           <label>Imagen</label>
           <span ng-show="cat.Course.image"><a ng-href="{{cat.Course.image}}" target="_blank">{{cat.Course.image}}</a></span>
           <div>
+            <div>
+              <small>La imagen debe ser de 1170x670 pixeles</small>
+            </div>
             <button type="button" class="btn btn-link" ng-click="cat.setFile(cat.typeName, 'image')">Cargar</button>
           </div>
         </div>
@@ -86,6 +89,9 @@
           <label>Imagen</label>
           <span ng-show="cat.Track.image"><a ng-href="{{cat.Track.image}}" target="_blank">{{cat.Track.image}}</a></span>
           <div>
+            <div>
+              <small>La imagen debe ser de 375x230 pixeles</small>
+            </div>
             <button type="button" class="btn btn-link" ng-click="cat.setFile(cat.typeName, 'image')">Cargar</button>
           </div>
         </div>
@@ -174,7 +180,6 @@
               <th><span>Twitter</span></th>
               <th><span>Web</span></th>
               <th><span>Linked-In</span></th>
-              <th><span>Foto</span></th>
             </tr>
           </thead>
           <tbody>
@@ -182,7 +187,6 @@
               <td><input type="text" class="form-control" ng-model="cat.Guest.twitter"></td>
               <td><input type="text" class="form-control" ng-model="cat.Guest.web"></td>
               <td><input type="text" class="form-control" ng-model="cat.Guest.linkedin"></td>
-              <td><input type="text" class="form-control" ng-model="cat.Guest.image"></td>
             </tr>
           </tbody>
         </table>
@@ -199,6 +203,9 @@
           <label>Imagen</label>
           <span ng-show="cat.Carousel.image"><a ng-href="{{cat.Carousel.image}}" target="_blank">{{cat.Carousel.image}}</a></span>
           <div>
+            <div>
+              <small>La imagen debe ser de 200x200 pixeles</small>
+            </div>
             <button type="button" class="btn btn-link" ng-click="cat.setFile(cat.typeName, 'image')">Cargar</button>
           </div>
         </div>
