@@ -28,7 +28,7 @@ angular.module 'iventureFront'
         controller: 'EditCategoryController'
         controllerAs: 'cat'
         resolve:
-          type: ($stateParams, Course, Track, Guest) ->
+          type: ($stateParams, Course, Track, Guest, Carousel) ->
             Cat = eval($stateParams.id)
             Cat
               .findById({id: $stateParams.item})

@@ -1,4 +1,15 @@
 angular.module 'iventureFront'
+  .filter 'names', ->
+    (input) ->
+      types = []
+      types['Course'] = 'Cursos';
+      types['Track'] = 'Tracks';
+      types['Guest'] = 'Invitados';
+      types['Carousel'] = 'Aliados';
+
+      types[input]
+
+
   .directive 'ngFiles', ($parse) ->
     fn_link = (scope, element, attrs) ->
       onChange = $parse(attrs.ngFiles)
@@ -7,7 +18,6 @@ angular.module 'iventureFront'
     {
       link: fn_link
     }
-    return
   .controller 'AdminController', ($state) ->
     'ngInject'
     vm = this
@@ -15,10 +25,11 @@ angular.module 'iventureFront'
     vm.types = [
       {id: 'Course', name: 'Cursos'},
       {id: 'Track', name: 'Tracks'},
-      {id: 'Guest', name: 'Invitados'}
+      {id: 'Guest', name: 'Invitados'},
+      {id: 'Carousel', name: 'Aliados'}
     ]
     return
-  .controller 'CategoryController', ($state, toastr, $stateParams, Course, Track, Guest) ->
+  .controller 'CategoryController', ($state, toastr, $stateParams, Course, Track, Guest, Carousel) ->
     'ngInject'
     vm = this
 
@@ -31,7 +42,7 @@ angular.module 'iventureFront'
       .then (items) ->
         vm.resources = items
       .catch ->
-          toastr.error 'Error', 'No se pudo borrar el elemento'
+          toastr.error 'Error', 'Hubo un error al buscar los elementos de esta categoría.'
 
     vm.delete = (event, id) ->
       event.preventDefault()
@@ -48,12 +59,13 @@ angular.module 'iventureFront'
   
     return
 
-  .controller 'NewCategoryController', (toastr, $stateParams, Course, Track, Guest, $state, $uibModal) ->
+  .controller 'NewCategoryController', (toastr, $stateParams, Course, Track, Guest, Carousel, $state, $uibModal) ->
     'ngInject'
     vm = this
     vm.Course = {}
     vm.Track = {}
     vm.Guest = {}
+    vm.Carousel = {}
 
     Course.find().$promise.then (courses) ->
       vm.courses = courses
@@ -70,37 +82,14 @@ angular.module 'iventureFront'
           $state.go 'admin.category', {id: vm.typeName}, {reload: true}
         .catch ->
           toastr.error 'Elemento agregado', 'Se agregó el elemento a la tabla'
-    return
 
-  .controller 'EditCategoryController', (type, toastr, $stateParams, $uibModal, base, Course) ->
-    'ngInject'
-    vm = this
-
-    vm.typeName = $stateParams.id
-    Course.find().$promise.then (courses) ->
-      vm.courses = courses
-
-    vm.createProduct = (event) ->
-      event.preventDefault()
-      vm[vm.typeName]
-        .$save()
-        .then ->
-          toastr.success 'Elemento guardado', 'Ahora puede revisarlo en el home.'
-        .catch (error) ->
-          if error.error?.message?
-            toastr.error 'Error al guardar el producto.', error.message
-          else
-            toastr.error 'Error al guardar el producto.', 'Intente más tarde'
-      return
-
-    vm.setImage = (type) ->
+    vm.setFile = (type, fileType) ->
       modal = $uibModal.open({
         animation: true
         templateUrl: 'app/main/edit/upload.html'
         size: 'md'
         controller: ($scope, base) ->
           formdata = new FormData()
-
           $scope.saveIt = ->
             $.ajax({
               url: "http://#{base}/api/containers/#{type}/upload"
@@ -125,7 +114,68 @@ angular.module 'iventureFront'
       modal.result.then (result) ->
         console.log result
         if result
-          vm[vm.typeName].image = result
+          vm[vm.typeName][fileType] = result
+        return
+
+      return
+    return
+
+  .controller 'EditCategoryController', (type, toastr, $stateParams, $uibModal, base, Course) ->
+    'ngInject'
+    vm = this
+
+    vm.typeName = $stateParams.id
+    Course.find().$promise.then (courses) ->
+      vm.courses = courses
+
+    vm.createProduct = (event) ->
+      event.preventDefault()
+      vm[vm.typeName]
+        .$save()
+        .then ->
+          toastr.success 'Elemento guardado', 'Ahora puede revisarlo en el home.'
+        .catch (error) ->
+          if error.error?.message?
+            toastr.error 'Error al guardar el producto.', error.message
+          else
+            toastr.error 'Error al guardar el producto.', 'Intente más tarde'
+      return
+
+    vm.setFile = (type, fileType) ->
+      modal = $uibModal.open({
+        animation: true
+        templateUrl: 'app/main/edit/upload.html'
+        size: 'md'
+        controller: ($scope, base) ->
+          formdata = new FormData()
+          $scope.saveIt = ->
+            $.ajax({
+              url: "http://#{base}/api/containers/#{type}/upload"
+              type: 'POST'
+              data: formdata
+              async: false
+              success: (response) ->
+                $scope.$close("http://#{base}/api/containers/#{type}/download/#{response.result.files.file[0].name}")
+              error: () ->
+                console.log 'error'
+              cache: false
+              contentType: false
+              processData: false
+            })
+            return
+          $scope.getTheFiles = ($files) ->
+            angular.forEach $files, (value, key) ->
+              formdata.append 'file', value
+            console.log formdata
+          return
+      })
+      modal.result.then (result) ->
+        console.log result
+        if result
+          vm[vm.typeName][fileType] = result
+        return
+
+      return
 
     vm[vm.typeName] = type
     return

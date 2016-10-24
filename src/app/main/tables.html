@@ -1,5 +1,5 @@
 <div>
-  <h1>{{cat.id}}</h1>
+  <h1>{{cat.id | names}}</h1>
   <div ui-view>
     <nav class="">
       <ul class="nav nav-pills">
@@ -153,6 +153,20 @@
         <p>
           <a href="{{item.image}}" target="_blank">{{item.image}}</a>
         </p>
+      </div>
+    </div>
+
+
+    <div ng-show="cat.id == 'Carousel'">
+      <div class="row">
+        <div class="col-sm-6" ng-repeat="item in cat.resources">
+          <img ng-src="{{item.image}}" class="img-thumbnail" />
+          <p class="text-muted">{{item.description}}</p>
+          <div>
+            <a ui-sref="admin.category.edit({item: item.id})">Editar</a>
+            <a href="#" ng-click="cat.delete($event, item.id)">Eliminar</a>
+          </div>
+        </div>
       </div>
     </div>
 
