@@ -154,6 +154,9 @@
           <label>Imagen</label>
           <span ng-show="cat.Guest.image"><a ng-href="{{cat.Guest.image}}" target="_blank">{{cat.Guest.image}}</a></span>
           <div>
+            <div>
+              <small>La imagen debe ser de 350x160 pixeles</small>
+            </div>
             <button type="button" class="btn btn-link" ng-click="cat.setFile(cat.typeName, 'image')">Cargar</button>
           </div>
         </div>
