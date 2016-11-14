@@ -34,20 +34,12 @@
           <thead>
             <tr>
               <th><span>Perfil</span></th>
-              <th><span>Cuándo/Dónde</span></th>
-              <th><span>Precio</span></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>
-                <textarea ng-model="cat.Course.profile" class="form-control" required></textarea>
-              </td>
-              <td>
-                <textarea ng-model="cat.Course.whenWhere" class="form-control" required></textarea>
-              </td>
-              <td>
-                <input ng-model="cat.Course.price" type="text" class="form-control" required></input>
+                <text-angular ng-model="cat.Course.profile"></text-angular>
               </td>
             </tr>
           </tbody>
@@ -56,11 +48,19 @@
           <thead>
             <tr>
               <th><span>Financiamiento</span></th>
+              <th><span>Precio</span></th>
+              <th><span>Cuándo/Dónde</span></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td><textarea ng-model="cat.Course.priceDescription" class="form-control" required></textarea></td>
+              <td>
+                <input ng-model="cat.Course.price" type="text" class="form-control" required></input>
+              </td>
+              <td>
+                <textarea ng-model="cat.Course.whenWhere" class="form-control" required></textarea>
+              </td>
             </tr>
             <tr>
               <td>
@@ -68,6 +68,7 @@
                   <input type="checkbox" ng-model="cat.Course.comming"> Próximamente
                 </label>
               </td>
+              <td></td><td></td>
             </tr>
           </tbody>
         </table>
