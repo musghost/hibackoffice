@@ -2,7 +2,7 @@
   "name": "iventureFront",
   "version": "0.0.0",
   "dependencies": {
-    "angular-animate": "~1.4.2",
+    "angular-animate": "^1.5.8",
     "angular-cookies": "~1.4.2",
     "angular-touch": "~1.4.2",
     "angular-sanitize": "~1.4.2",
