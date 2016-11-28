@@ -56,7 +56,7 @@
             <tr>
               <td><textarea ng-model="cat.Course.priceDescription" class="form-control" required></textarea></td>
               <td>
-                <input ng-model="cat.Course.price" type="text" class="form-control" required></input>
+                <input ng-model="cat.Course.price" type="number" string-to-number min="0" class="form-control" required></input>
               </td>
               <td>
                 <textarea ng-model="cat.Course.whenWhere" class="form-control" required></textarea>
@@ -72,8 +72,11 @@
             </tr>
           </tbody>
         </table>
+        <div ng-show="cat.loading">
+          <p>Guardando... <img src="http://www.downgraf.com/wp-content/uploads/2014/09/01-progress.gif" width="30"></p>
+        </div>
         <div>
-          <button class="btn btn-primary" type="submit" ng-click="">Guardar</button>
+          <button ng-disabled="cat.loading" class="btn btn-primary" type="submit" ng-click="">Guardar</button>
           <a class="btn btn-success" ui-sref="^">Regresar</a>
         </div>
       </div>
@@ -137,8 +140,11 @@
             </tr>
           </tbody>
         </table>
+        <div ng-show="cat.loading">
+          <p>Guardando... <img src="http://www.downgraf.com/wp-content/uploads/2014/09/01-progress.gif" width="30"></p>
+        </div>
         <div>
-          <button class="btn btn-primary" type="submit" ng-click="">Guardar</button>
+          <button ng-disabled="cat.loading" class="btn btn-primary" type="submit" ng-click="">Guardar</button>
           <a class="btn btn-success" ui-sref="^">Regresar</a>
         </div>
       </div>
@@ -194,8 +200,11 @@
             </tr>
           </tbody>
         </table>
+        <div ng-show="cat.loading">
+          <p>Guardando... <img src="http://www.downgraf.com/wp-content/uploads/2014/09/01-progress.gif" width="30"></p>
+        </div>
         <div>
-          <button class="btn btn-primary" type="submit" ng-click="">Guardar</button>
+          <button ng-disabled="cat.loading" class="btn btn-primary" type="submit" ng-click="">Guardar</button>
           <a class="btn btn-success" ui-sref="^">Regresar</a>
         </div>
       </div>
@@ -218,8 +227,11 @@
             <textarea ng-model="cat.Carousel.description" class="form-control" placeholder="Descripción"></textarea>
           </div>
         </div>
+        <div ng-show="cat.loading">
+          <p>Guardando... <img src="http://www.downgraf.com/wp-content/uploads/2014/09/01-progress.gif" width="30"></p>
+        </div>
         <div>
-          <button class="btn btn-primary" type="submit" ng-click="">Guardar</button>
+          <button ng-disabled="cat.loading" class="btn btn-primary" type="submit" ng-click="">Guardar</button>
           <a class="btn btn-success" ui-sref="^">Regresar</a>
         </div>
       </div>

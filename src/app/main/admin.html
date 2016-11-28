@@ -8,6 +8,7 @@
           <li class="dropdown-header">Edición de tablas</li>
           <li><a href="http://hackinstitute.mx" target="_blank">Home</a></li>
           <li ng-repeat="type in main.types"><a ui-sref="admin.category({id: type.id})">{{type.name}}</a></li>
+          <li><a ui-sref="admin.pdfs">PDFs</a></li>
           <li>&nbsp;</li>
           <li>
             <a href="#" ng-click="main.logout($event)">Salir</a>

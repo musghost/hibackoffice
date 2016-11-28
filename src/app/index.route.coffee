@@ -35,5 +35,10 @@ angular.module 'iventureFront'
               .$promise
               .then (result) ->
                 result
+      .state 'admin.pdfs',
+        url: '/pdfs'
+        templateUrl: 'app/main/edit/pdfs.html'
+        controller: 'PDFController'
+        controllerAs: 'pdfs'
 
     $urlRouterProvider.otherwise '/login'

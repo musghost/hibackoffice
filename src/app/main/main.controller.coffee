@@ -1,4 +1,12 @@
 angular.module 'iventureFront'
+  .directive 'stringToNumber', ->
+    require: 'ngModel'
+    link: (scope, element, attrs, ngModel) ->
+      ngModel.$parsers.push (value) ->
+        '' + value
+      ngModel.$formatters.push (value) ->
+        parseFloat value
+      return
   .filter 'names', ->
     (input) ->
       types = []
@@ -49,7 +57,7 @@ angular.module 'iventureFront'
       .then (items) ->
         vm.resources = items
       .catch ->
-          toastr.error 'Error', 'Hubo un error al buscar los elementos de esta categoría.'
+        toastr.error 'Error', 'Hubo un error al buscar los elementos de esta categoría.'
 
     vm.delete = (event, id) ->
       event.preventDefault()
@@ -94,6 +102,7 @@ angular.module 'iventureFront'
     vm.Track = {}
     vm.Guest = {}
     vm.Carousel = {}
+    vm.loading = false
 
     Course.find().$promise.then (courses) ->
       vm.courses = courses
@@ -102,13 +111,16 @@ angular.module 'iventureFront'
     Get = eval($stateParams.id)
     vm.createProduct = (event) ->
       event.preventDefault()
+      vm.loading = true
       Get
         .create(vm[vm.typeName])
         .$promise
         .then () ->
+          vm.loading = false
           toastr.success 'Elemento agregado', 'Se agregó el elemento a la tabla'
           $state.go 'admin.category', {id: vm.typeName}, {reload: true}
         .catch ->
+          vm.loading = false
           toastr.error 'Elemento agregado', 'Se agregó el elemento a la tabla'
 
     vm.setFile = (type, fileType) ->
@@ -118,15 +130,18 @@ angular.module 'iventureFront'
         size: 'md'
         controller: ($scope, base) ->
           formdata = new FormData()
+          $scope.loading = false
           $scope.saveIt = ->
+            $scope.loading = true
             $.ajax({
               url: "http://#{base}/api/containers/#{type}/upload"
               type: 'POST'
               data: formdata
-              async: false
               success: (response) ->
+                $scope.loading = false
                 $scope.$close("http://#{base}/api/containers/#{type}/download/#{response.result.files.file[0].name}")
               error: () ->
+                $scope.loading = false
                 console.log 'error'
               cache: false
               contentType: false
@@ -152,17 +167,22 @@ angular.module 'iventureFront'
     'ngInject'
     vm = this
 
+    vm.loading = false
+
     vm.typeName = $stateParams.id
     Course.find().$promise.then (courses) ->
       vm.courses = courses
 
     vm.createProduct = (event) ->
       event.preventDefault()
+      vm.loading = true
       vm[vm.typeName]
         .$save()
         .then ->
           toastr.success 'Elemento guardado', 'Ahora puede revisarlo en el home.'
+          vm.loading = false
         .catch (error) ->
+          vm.loading = false
           if error.error?.message?
             toastr.error 'Error al guardar el producto.', error.message
           else
@@ -176,15 +196,18 @@ angular.module 'iventureFront'
         size: 'md'
         controller: ($scope, base) ->
           formdata = new FormData()
+          $scope.loading = false
           $scope.saveIt = ->
+            $scope.loading = true
             $.ajax({
               url: "http://#{base}/api/containers/#{type}/upload"
               type: 'POST'
               data: formdata
-              async: false
               success: (response) ->
+                $scope.loading = false
                 $scope.$close("http://#{base}/api/containers/#{type}/download/#{response.result.files.file[0].name}")
               error: () ->
+                $scope.loading = false
                 console.log 'error'
               cache: false
               contentType: false
@@ -219,5 +242,62 @@ angular.module 'iventureFront'
       Admin.login {rememberMe: vm.log.remember}, vm.log, () ->
         $state.go 'admin'
         return
+      return
+    return
+  .controller 'PDFController', (Admin, $state, Extra, $uibModal, toastr) ->
+    'ngInject'
+    vm = @
+
+    Extra.find().$promise.then (data) ->
+      vm.extras = data
+
+    vm.setFile = (type, id) ->
+      modal = $uibModal.open({
+        animation: true
+        templateUrl: 'app/main/edit/upload-pdf.html'
+        size: 'md'
+        controller: ($scope, base) ->
+          formdata = new FormData()
+          $scope.loading = false
+          $scope.saveIt = ->
+            $scope.loading = true
+            $.ajax({
+              url: "http://#{base}/api/containers/#{type}/upload"
+              type: 'POST'
+              data: formdata
+              success: (response) ->
+                $scope.$close("http://#{base}/api/containers/#{type}/download/#{response.result.files.file[0].name}")
+                $scope.loading = false
+              error: () ->
+                console.log 'error'
+                $scope.loading = false
+              cache: false
+              contentType: false
+              processData: false
+            })
+            return
+          $scope.getTheFiles = ($files) ->
+            angular.forEach $files, (value, key) ->
+              formdata.append 'file', value
+          return
+      })
+      modal.result.then (result) ->
+        if result
+          vm.extras[id].url = result
+        return
+      return
+
+    vm.saveExtra = (event, id) ->
+      event.preventDefault()
+      vm.extras[id]
+        .$save()
+        .then ->
+          toastr.success 'Elemento guardado', 'Ahora puede revisarlo en el home.'
+        .catch (error) ->
+          if error.error?.message?
+            toastr.error 'Error al guardar el PDF.', error.message
+          else
+            toastr.error 'Error al guardar el PDF.', 'Intente más tarde'
+
       return
     return
